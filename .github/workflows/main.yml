@@ -1,0 +1,35 @@
+name: minimal test
+# Tests the pipeline with a minimal dataset
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  release:
+    types: [published]
+
+jobs:
+  test:
+    name: Run pipeline with test data
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        NXF_VER:
+          - "latest-stable"
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Nextflow
+        uses: nf-core/setup-nextflow@v1
+        with:
+          version: "${{ matrix.NXF_VER }}"
+
+      - name: Hash Github Workspace
+        id: hash_workspace
+        run: |
+          echo "digest=$(echo ${{ github.workspace }} | md5sum | cut -c 1-25)" >> $GITHUB_OUTPUT
+          
+      - name: Run pipeline with test data
+        run: |
+          nextflow run ${GITHUB_WORKSPACE} --csv ${{ github.workspace }}/test/samplesheet.csv --in_dir ${{ github.workspace }}/test/fastq -profile test
