@@ -32,4 +32,4 @@ jobs:
           
       - name: Run pipeline with test data
         run: |
-          nextflow run ${GITHUB_WORKSPACE} --csv ${{ github.workspace }}/test/samplesheet.csv --in_dir ${{ github.workspace }}/test/fastq -profile test
+          nextflow run ${GITHUB_WORKSPACE} --csv ${{ github.workspace }}/test/gitwf_test.csv --in_dir ${{ github.workspace }}/test/fastq -profile test
