@@ -2,7 +2,7 @@
 
 This workflow provides mapped bam, count matrix and multiqc report from amplicon sequences.
 
-You can run this workflow on the login node with `nextflow run /project/ctb-noncodo/Platform/templates/nextflow/nf-amplicon --csv SAMPLESHEET --in_dir INPUT DIRECTORY` with nextflow, apptainer and r modules loaded.
+You can run this workflow on the login node with `nextflow run chusj-pigu/nf-amplicon --csv SAMPLESHEET --in_dir INPUT DIRECTORY` with nextflow, apptainer and R installed.
 
 ## Input
 
