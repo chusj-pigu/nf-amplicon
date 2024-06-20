@@ -2,7 +2,7 @@
 
 This workflow provides mapped bam, count matrix and multiqc report from amplicon sequences.
 
-You can run this workflow on the login node with `nextflow run chusj-pigu/nf-amplicon --csv SAMPLESHEET --in_dir INPUT DIRECTORY` with nextflow, apptainer and R installed.
+You can run this workflow on the login node with `nextflow run chusj-pigu/nf-amplicon --csv SAMPLESHEET --in_dir INPUT DIRECTORY --ref_dir REFERENCE DIRECTORY` with nextflow, apptainer and R installed.
 
 To run on Compute Canada Narval, use `-profile drac`. You can also run it on the test data using `-profile test` or `-profile test_drac` for testing on compute canada.
 
@@ -10,7 +10,7 @@ To run on Compute Canada Narval, use `-profile drac`. You can also run it on the
 
 You must provide at least two inputs for this workflow:
 
-    1. A samplesheet CSV file with three columns : first one is the sample ID, second is the path to the directory containing reference files or path to the reference file, and third is the nanopore barcode associated with the sample. Example:
+    1. A samplesheet CSV file with three columns : first one is the sample ID, second is the subdirectory name containing the reference fasta files (or fasta file name without its extension), and third is the nanopore barcode associated with the sample. Example:
 
     ``` bash
     sample,fasta,barcode
@@ -18,7 +18,8 @@ You must provide at least two inputs for this workflow:
     sample2,FASTA-1,barcode02
     ```
 
-    2. Directory where the fastq reads are located. They must be under `barcodeXX` subdirectory.
+    2. Absolute path to where the fastq reads are located. They must be under `barcodeXX` subdirectory.
+    3. Absolute path to where the reference files are located.
 
 You can also provide an output directory with `--out-dir`.
 
