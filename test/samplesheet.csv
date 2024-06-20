@@ -1,0 +1,3 @@
+sample,fasta,barcode
+sample1,/home/clawrukd/scratch/wf-tests/nf-amplicon/test/ref1,barcode01
+sample2,/home/clawrukd/scratch/wf-tests/nf-amplicon/test/ref2,barcode02
