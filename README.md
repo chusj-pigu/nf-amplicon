@@ -4,6 +4,8 @@ This workflow provides mapped bam, count matrix and multiqc report from amplicon
 
 You can run this workflow on the login node with `nextflow run chusj-pigu/nf-amplicon --csv SAMPLESHEET --in_dir INPUT DIRECTORY` with nextflow, apptainer and R installed.
 
+To run on Compute Canada Narval, use `-profile drac`. You can also run it on the test data using `-profile test` or `-profile test_drac` for testing on compute canada.
+
 ## Input
 
 You must provide at least two inputs for this workflow:
