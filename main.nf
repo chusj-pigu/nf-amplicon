@@ -1,9 +1,9 @@
 
-include { merge_fq } from './subworkflows/merge_fastq'
-include { mapping } from './subworkflows/mapping_amplicon'
-include { sam_sort } from './subworkflows/sort_bam'
-include { count_matrix } from './subworkflows/countmx_amplicon'
-include { clean_countmx } from './subworkflows/countmx_amplicon'
+include { merge_amplicon } from './subworkflows/ingress'
+include { mapping_amplicon } from './subworkflows/minimap'
+include { sam_sort } from './subworkflows/samtools'
+include { multiBamSummary } from './subworkflows/deeptools'
+include { clean_countmx } from './subworkflows/rscripts'
 include { mosdepth } from './subworkflows/mosdepth'
 include { multiqc } from './subworkflows/multiqc'
 
@@ -13,10 +13,10 @@ workflow {
         .map { row -> 
             tuple(row.sample, row.fasta, row.barcode)
         }
-    merge_fq(samples)
+    merge_amplicon(samples)
 
-    mapping(merge_fq.out)
-    sam_sort(mapping.out)
+    mapping_amplicon(merge_amplicon.out)
+    sam_sort(mapping_amplicon.out)
 
     multi_bam_ch = sam_sort.out
         .map { bam, bai -> 
@@ -26,8 +26,8 @@ workflow {
         }
         .groupTuple(by:0)                       // Group bam files by reference used
     
-    count_matrix(multi_bam_ch)
-    ctmx=count_matrix.out
+    multiBamSummary(multi_bam_ch)
+    ctmx=multiBamSummary.out
         .collect()
     clean_countmx(ctmx)
 
