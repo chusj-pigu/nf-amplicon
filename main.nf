@@ -1,11 +1,11 @@
 
-include { merge_amplicon } from './subworkflows/ingress'
-include { mapping_amplicon } from './subworkflows/minimap'
-include { sam_sort } from './subworkflows/samtools'
-include { multiBamSummary } from './subworkflows/deeptools'
-include { clean_countmx } from './subworkflows/rscripts'
-include { mosdepth } from './subworkflows/mosdepth'
-include { multiqc } from './subworkflows/multiqc'
+include { merge_amplicon } from './modules/ingress'
+include { mapping_amplicon } from './modules/minimap'
+include { sam_sort } from './modules/samtools'
+include { multiBamSummary } from './modules/deeptools'
+include { clean_countmx } from './modules/rscripts'
+include { mosdepth } from './modules/mosdepth'
+include { multiqc } from './modules/multiqc'
 
 workflow { 
     samples=Channel.fromPath(params.csv)
